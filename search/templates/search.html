@@ -31,7 +31,7 @@
             </thead>
             <tbody>
                 {% for egresado in lista %}
-                <tr onclick="window.location='/egresado/{{ egresado.personal.identificacion }}';">
+                <tr onclick="window.location='/egresado/{{ egresado.personal.identificacion }}';" style="cursor: pointer;">
                     <td>{{ egresado.personal.identificacion }}</td>
                     <td>{{ egresado.personal.nombre }}</td>
                     <td>{{ egresado.score }}</td>
