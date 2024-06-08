@@ -4,7 +4,24 @@ from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
-    egresados = egresados_collection.find({ "$text": { "$search": "pollos en la luna","$language":"es", "$diacriticSensitive":True} }, {"score": { "$meta": "textScore" } }).sort( { "score": { "$meta": "textScore" } })
+    query = request.GET.get('q', '')
+    egresados = egresados_collection.find(
+        { 
+            "$text": { 
+                "$search": query,
+                "$language":"es",
+                "$diacriticSensitive":True
+            }
+        },
+        {
+            "score":{
+                "$meta": "textScore"
+            }
+        }).sort(
+            { "score": {
+                "$meta": "textScore"
+                }
+            })
     return render(request, "search.html",{"lista":egresados})
 
 
