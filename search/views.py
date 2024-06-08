@@ -24,7 +24,7 @@ def index(request):
             })
     return render(request, "search.html",{"lista":egresados})
 
-
-def get_all_egresados(request):
-    egresados = egresados_collection.find({ "$text": { "$search": "educación en la infancia","$language":"es", "$diacriticSensitive":True} }, {"score": { "$meta": "textScore" } }).sort( { "score": { "$meta": "textScore" } })
-    return HttpResponse(egresados)
+def get_egresado(request, id):
+    egresado = egresados_collection.find_one({"personal.identificacion":int(id)})
+    pokemon = str(int(id) % 1025).zfill(3)
+    return render(request, "egresado.html",{"egresado":egresado, "pokemon": pokemon})

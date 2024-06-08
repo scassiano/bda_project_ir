@@ -12,8 +12,8 @@
         <form method="GET" action="">
             <div class="input-group mb-3">
                 <input type="text" name="q" class="form-control" placeholder="Buscar...">
-                <button type="submit" class="btn btn-primary">
-                    <span class="material-icons">&#xe8b6;</span>
+                <button type="submit" class="btn">
+                    <span class="material-icons">search</span>
                 </button>
             </div>
         </form>
@@ -23,7 +23,6 @@
                 <tr>
                     <th>Identificación</th>
                     <th>Nombre</th>
-                    <th>Residencia</th>
                     <th>Score</th>
                     <th>Grados UN</th>
                     <th>Tesis título</th>
@@ -32,10 +31,9 @@
             </thead>
             <tbody>
                 {% for egresado in lista %}
-                <tr>
+                <tr onclick="window.location='/egresado/{{ egresado.personal.identificacion }}';">
                     <td>{{ egresado.personal.identificacion }}</td>
                     <td>{{ egresado.personal.nombre }}</td>
-                    <td>{{ egresado.personal.lugar_residencia.pais }}, {{ egresado.personal.lugar_residencia.ciudad }}</td>
                     <td>{{ egresado.score }}</td>
                     <td>
                         {% for grado_un in egresado.grados_un %}
@@ -67,7 +65,7 @@
     <script src="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-2.0.8/datatables.min.js"></script>
     <script>
         new DataTable('#egresados-table', {
-            order: [[3, 'desc']],
+            order: [[2, 'desc']],
         });
     </script>
     

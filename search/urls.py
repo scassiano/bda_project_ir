@@ -3,5 +3,5 @@ from . import views
 
 urlpatterns = [
     path("",views.index),
-    path("showall/",views.get_all_egresados)
+    path("egresado/<str:id>",views.get_egresado)
 ]

@@ -1,0 +1,215 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+
+    <title>{{ egresado.personal.nombre }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+
+<body>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <div class="container bootstrap snippets bootdey">
+        <div class="row">
+            <div class="profile-nav col-md-3">
+                <div class="panel">
+                    <div class="user-heading round">
+                        <a href="#">
+                            <img src="https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/{{pokemon}}.png"
+                                alt>
+                        </a>
+                        <h1>{{ egresado.personal.nombre }}</h1>
+                    </div>
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class="active"><a href=""> <span class="material-icons">chevron_left</span> Volver a la
+                                búsqueda</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="profile-info col-md-9">
+                <div class="panel">
+                    <div class="panel-body bio-graph-info">
+                        <h1>Datos Personales</h1>
+                        <div class="row">
+                            <div class="bio-row">
+                                <p><span>Nombre </span>{{egresado.personal.nombre}}</p>
+                            </div>
+                            <div class="bio-row">
+                                <p><span>Identificación </span>{{egresado.personal.identificacion}}</p>
+                            </div>
+                            <div class="bio-row">
+                                <p><span>Nacido en </span>{{egresado.personal.lugar_nacimiento.ciudad}},
+                                    {{egresado.personal.lugar_nacimiento.pais}}</p>
+                            </div>
+                            <div class="bio-row">
+                                <p><span>Reside en </span>{{ egresado.personal.lugar_residencia.ciudad }},
+                                    {{egresado.personal.lugar_residencia.pais }}</p>
+                            </div>
+                            <div class="bio-row">
+                                <p><span>Cumpleaños</span>{{egresado.personal.fecha_nacimiento}}</p>
+                            </div>
+                            <div class="bio-row">
+                                <p><span>Usuario UN</span>{{egresado.personal.usuario_institucional}}</p>
+                            </div>
+                            <div class="bio-row">
+                                <p><span>Admisión</span>{{egresado.personal.tipo_adimison}}</p>
+                            </div>
+                            <div class="bio-row">
+                                <p><span>PBM </span>{{egresado.personal.pbm}}</p>
+                            </div>
+                            <div class="bio-row">
+                                <p><span>LinkedIn </span>{{egresado.personal.linkedin}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h2>Grados</h2>
+                    <div class="row">
+                        {% for grado in egresado.grados_un %}
+                        <div class="col-md-12">
+                            <div class="panel">
+                                <div class="panel-body">
+                                    <div class="bio-desk">
+                                        <h4 class="green">{{ grado.nivel }} - {{grado.programa.nombre }}</h4>
+                                        <p>{{ grado.departamento.nombre }}, {{ grado.facultad.nombre }} - Sede
+                                            {{grado.facultad.sede}}</p>
+                                        {% if grado.trabajo_grado.modalidad == "Tesis" %}
+                                        <p>Modalidad de grado: {{ grado.trabajo_grado.modalidad }} dirigida por {{ grado.trabajo_grado.director}}</p>
+                                        {% elif grado.trabajo_grado.modalidad == "Pasantía" %}
+                                        <p>Modalidad de grado: {{ grado.trabajo_grado.modalidad }} realizada en {{ grado.trabajo_grado.empresa.nombre}}</p>
+                                        {% else %}
+                                        <p>Modalidad de grado: {{ grado.trabajo_grado.modalidad }}</p>
+                                        {% endif %}
+                                        <p>Graduado en {{ grado.periodo }}</p>
+                                        <p>Promedio: {{ grado.promedio }}</p>
+                                        <p>Matrículas: {{ grado.matriculas }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% if egresado.grados_externos %}
+                <h2>Grados Externos</h2>
+                <div class="row">
+                    {% for grado in egresado.grados_externos %}
+                    <div class="col-md-12">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <div class="bio-desk">
+                                    <h4 class="green">Título: {{ grado.titulo }}</h4>
+                                    <p>{{ grado.institucion }} ({{ grado.lugar.ciudad }}, {{ grado.lugar.pais }})</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                <h2>Tesis</h2>
+                <div class="row">
+                    {% for grado in egresado.grados_un %}
+                    {% if grado.trabajo_grado.modalidad == "Tesis" %}
+                    <div class="col-md-12">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <div class="bio-desk">
+                                    <h4 class="red">{{grado.trabajo_grado.tesis.titulo}}</h4>
+                                    <p>{{grado.trabajo_grado.tesis.descripcion}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="col-md-12">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <div class="bio-desk">
+                                    <h4> No ha realizado </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                {% if egresado.publicaciones %}
+                <h2>Publicaciones</h2>
+                <div class="row">
+                    {% for publicacion in egresado.publicaciones %}
+                    <div class="col-md-12">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <div class="bio-desk">
+                                    <h4 class="red">{{publicacion.tipo}}: {{publicacion.titulo}}</h4>
+                                    <p>Descripción: {{publicacion.descripcion}}</p>
+                                    <p>Publicado en {{publicacion.fecha}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                {% if egresado.empleos %}
+                <h2>Empleos</h2>
+                <div class="row">
+                    {% for empleo in egresado.empleos %}
+                    <div class="col-md-6">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <div class="bio-desk">
+                                    <h4 class="terques">{{empleo.cargo}}</h4>
+                                    <p>Empresa: {{empleo.empresa.nombre}}</p>
+                                    <p>Sector: {{empleo.empresa.sector}}</p>
+                                    <p>Fecha inicio: {{empleo.fecha_inicio}}</p>
+                                    {% if empleo.fecha_finalizacion %}
+                                        <p>Fecha finalización: {{empleo.fecha_finalizacion}}</p>
+                                    {% else %}
+                                        <p>Fecha finalización: En curso</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                {% if egresado.reconocimientos %}
+                <h2>Reconocimientos</h2>
+                <div class="row">
+                    {% for reconocimiento in egresado.reconocimientos %}
+                    <div class="col-md-6">
+                        <div class="panel">
+                            <div class="panel-body">
+                                <div class="bio-desk">
+                                    <h4 class="purple">{{reconocimiento.titulo}}</h4>
+                                    <p>Otorgado por: {{reconocimiento.entidad}}</p>
+                                    <p>Fecha: {{reconocimiento.fecha}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+
+    </script>
+</body>
+
+</html>
