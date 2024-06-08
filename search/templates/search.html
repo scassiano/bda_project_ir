@@ -7,5 +7,13 @@
 </head>
 <body>
     <h1>AQUI DEBERIA IR LA BUSQUEDA</h1>
+    {% for egresado in lista %}
+    <h1>{{egresado.personal.nombre}}</h1>
+        {%for grado in egresado.grados_un%}
+        <h2>{{grado.trabajo_grado.tesis.titulo}}</h2>
+        <h3>{{grado.trabajo_grado.tesis.descripcion}}</h3>
+        {% endfor %}
+    <h1>{{egresado.score}}</h1>
+    {% endfor %}
 </body>
 </html>
