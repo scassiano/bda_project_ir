@@ -4,7 +4,7 @@ from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
-    return HttpResponse('<iframe title="DefinitivoDashboard" width="1080" height="720" src="https://app.powerbi.com/view?r=eyJrIjoiYzFkZTg2NDEtNWQ4Mi00YmY0LWFiMjEtM2FiYTk0ZTQ0OTAyIiwidCI6IjU3N2ZjMWQ4LTA5MjItNDU4ZS04N2JmLWVjNGY0NTVlYjYwMCIsImMiOjR9" frameborder="0" allowFullScreen="true"></iframe>')
+    return render(request, "search.html")
 
 
 def get_all_egresados(request):
