@@ -7,18 +7,30 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <title>Búsqueda</title>
 </head>
-<body>
-    <div class="container mt-4">
-        <form method="GET" action="">
-            <div class="input-group mb-3">
-                <input type="text" name="q" class="form-control" placeholder="Buscar...">
-                <button type="submit" class="btn">
-                    <span class="material-icons">search</span>
+<body >
+    <div class="container mt-4" style="min-height:53.9vh;">
+        <div class="row d-flex align-items-center" style="justify-content:space-between; display:flex; align-items: center;">
+        <div class="col-auto mr-auto" style="flex-grow: 1;">
+            <h1 class="mb-0">Buscador</h1>
+        </div>
+        <div class="col-auto" >
+            <a role="button" class="btn btn-dark" href="/dashboard" style="cursor:pointer">
+               Ir al dashboard
+            </a>
+         </div>
+        </div>
+        <br>
+        <div style="border-style: solid; border-radius: 20px; border: thin solid black;  align-items: center; vertical-align: middle; ">
+        <form method="GET" action="" style="display: flex; align-items: center; vertical-align: middle;">
+                <input type="text" name="q" class="form-control shadow-none" placeholder="Buscar..." style="border-style:none; background: transparent; vertical-align: middle;">
+                <button type="submit" class="btn shadow-none">
+                    <span class="material-icons" style="color: black; vertical-align: middle;">search</span>
                 </button>
-            </div>
+            
+        </div>
         </form>
 
-        <table id="egresados-table" class="table table-striped" style="width:100%">
+        <table id="egresados-table" class="table table-striped" style="width:100%; ">
             <thead>
                 <tr>
                     <th>Identificación</th>
@@ -37,23 +49,29 @@
                     <td>{{ egresado.score }}</td>
                     <td>
                         {% for grado_un in egresado.grados_un %}
+                            {% if grado_un.trabajo_grado.modalidad == "Tesis"%}
                             {{ grado_un.programa.nombre }}
                             <br>
                             <br>
+                            {% endif %}
                         {% endfor %}
                     </td>
                     <td>
                         {% for grado_un in egresado.grados_un %}
+                        {% if grado_un.trabajo_grado.modalidad == "Tesis"%}
                             Título: {{ grado_un.trabajo_grado.tesis.titulo }}
                             <br>
                             <br>
+                            {% endif %}
                         {% endfor %}
                     </td>
                     <td>
                         {% for grado_un in egresado.grados_un %}
+                        {% if grado_un.trabajo_grado.modalidad == "Tesis"%}
                             Descripción: {{ grado_un.trabajo_grado.tesis.descripcion }}
                             <br>
                             <br>
+                            {% endif %}
                         {% endfor %}
                     </td>
                 </tr>
@@ -66,8 +84,19 @@
     <script>
         new DataTable('#egresados-table', {
             order: [[2, 'desc']],
+            "oLanguage": {  
+            "sSearch": "Filtrar por términos",
+            "sInfo":"Total de resultados: _TOTAL_",
+            "sLengthMenu" : "_MENU_ resultados por página",
+            "sInfoEmpty":"Total de resultados: _TOTAL_",
+            "sEmptyTable": "No hay coincidencias",
+            "sZeroRecords": "No hay coincidencias",
+            "sInfoFiltered":"(filtrado de un total de _MAX_ registros)"
+            }
         });
-    </script>
-    
+        
+    </script>    
 </body>
+{% include 'footer.html' %}
+
 </html>

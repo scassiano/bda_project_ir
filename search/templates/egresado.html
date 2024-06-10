@@ -27,7 +27,7 @@
                         <h1>{{ egresado.personal.nombre }}</h1>
                     </div>
                     <ul class="nav nav-pills nav-stacked">
-                        <li class="active"><a onclick="history.back()" style="cursor: pointer;"> <span class="material-icons">chevron_left</span> Volver atrás</a></li>
+                        <li class="active"><a onclick="history.back()" style="cursor: pointer;"> <span class="material-icons" style="vertical-align: middle;">chevron_left</span> Volver atrás</a></li>
                     </ul>
                 </div>
             </div>
@@ -51,7 +51,7 @@
                                     {{egresado.personal.lugar_residencia.pais }}</p>
                             </div>
                             <div class="bio-row">
-                                <p><span>Cumpleaños</span>{{egresado.personal.fecha_nacimiento}}</p>
+                                <p><span>F. Nacimiento</span>{{egresado.personal.fecha_nacimiento}}</p>
                             </div>
                             <div class="bio-row">
                                 <p><span>Usuario UN</span>{{egresado.personal.usuario_institucional}}</p>
@@ -86,7 +86,7 @@
                                         {% else %}
                                         <p>Modalidad de grado: {{ grado.trabajo_grado.modalidad }}</p>
                                         {% endif %}
-                                        <p>Graduado en {{ grado.periodo }}</p>
+                                        <p>Graduado en: {{ grado.periodo }}</p>
                                         <p>Promedio: {{ grado.promedio }}</p>
                                         <p>Matrículas: {{ grado.matriculas }}</p>
                                     </div>
@@ -210,5 +210,4 @@
 
     </script>
 </body>
-
 </html>

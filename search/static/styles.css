@@ -375,3 +375,15 @@ ul.summary-list > li:last-child  {
 .activity-desk .album a:last-child{
     margin-right: 0px;
 }
+
+*:focus{
+    outline: none;
+    box-shadow: none;
+    
+}
+footer {
+    clear: both;
+    position: relative;
+    height: 200px;
+    margin-top: -200px;
+}
