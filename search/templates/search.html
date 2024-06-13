@@ -22,7 +22,7 @@
         <br>
         <div style="border-style: solid; border-radius: 20px; border: thin solid black;  align-items: center; vertical-align: middle; ">
         <form method="GET" action="" style="display: flex; align-items: center; vertical-align: middle;">
-                <input type="text" name="q" class="form-control shadow-none" placeholder="Buscar..." style="border-style:none; background: transparent; vertical-align: middle;">
+                <input type="text" name="q" class="form-control shadow-none" placeholder="Buscar..." value="{{query}}" style="border-style:none; background: transparent; vertical-align: middle;">
                 <button type="submit" class="btn shadow-none">
                     <span class="material-icons" style="color: black; vertical-align: middle;">search</span>
                 </button>
@@ -43,7 +43,7 @@
             </thead>
             <tbody>
                 {% for egresado in lista %}
-                <tr onclick="window.location='/egresado/{{ egresado.personal.identificacion }}';" style="cursor: pointer;">
+                <tr onclick="window.open('/egresado/{{ egresado.personal.identificacion }}','_blank');" style="cursor: pointer;">
                     <td>{{ egresado.personal.identificacion }}</td>
                     <td>{{ egresado.personal.nombre }}</td>
                     <td>{{ egresado.score }}</td>
@@ -94,7 +94,6 @@
             "sInfoFiltered":"(filtrado de un total de _MAX_ registros)"
             }
         });
-        
     </script>    
 </body>
 {% include 'footer.html' %}

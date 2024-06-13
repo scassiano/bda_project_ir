@@ -9,8 +9,7 @@ def index(request):
         { 
             "$text": { 
                 "$search": query,
-                "$language":"es",
-                "$diacriticSensitive":True
+                "$language":"en",
             }
         },
         {
@@ -22,7 +21,7 @@ def index(request):
                 "$meta": "textScore"
                 }
             })
-    return render(request, "search.html",{"lista":egresados})
+    return render(request, "search.html",{"lista":egresados, "query":query})
 
 def get_egresado(request, id):
     egresado = egresados_collection.find_one({"personal.identificacion":int(id)})
